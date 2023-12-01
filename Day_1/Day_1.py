@@ -1,10 +1,10 @@
 import re
 
-def part_1():
-    file_path = 'input1.txt'
-    with open(file_path, 'r') as file:
-        lines_array = [line.strip() for line in file]
-    
+file_path = 'input.txt'
+with open(file_path, 'r') as file:
+    input = [line.strip() for line in file]
+
+def part_1(lines_array):
     lines_array = [re.sub('[a-zA-Z]', '', string) for string in lines_array]
     first_digit = [next((char for char in element if char.isdigit()), None) for element in lines_array]
     last_digit = [next((char for char in reversed(element) if char.isdigit()), None) for element in lines_array]
@@ -17,11 +17,7 @@ def part_1():
 
     print(result)
 
-def part_2():
-    file_path = 'input2.txt'
-    with open(file_path, 'r') as file:
-        lines_array = [line.strip() for line in file]
-
+def part_2(lines_array):
     lines_array = [s.replace("one", "on1e") for s in lines_array]
     lines_array = [s.replace("two", "t2wo") for s in lines_array]
     lines_array = [s.replace("three", "t3hree") for s in lines_array]
@@ -44,5 +40,5 @@ def part_2():
     result = sum(integer_array)
     print(result)
 
-part_1()
-part_2()
+part_1(input)
+part_2(input)
