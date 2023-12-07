@@ -1,4 +1,4 @@
-file_path = 'input.txt'
+file_path = 'Day_7.txt'
 with open(file_path, 'r') as file:
     input = file.read()
 

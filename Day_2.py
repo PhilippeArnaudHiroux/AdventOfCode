@@ -1,4 +1,4 @@
-file_path = 'input.txt'
+file_path = 'Day_2.txt'
 with open(file_path, 'r') as file:
     input = [line.strip() for line in file]
 
@@ -34,7 +34,7 @@ def part_2(input_List):
     print(result)
 
 
-#part_1(input)
+part_1(input)
 part_2(input)
 
 

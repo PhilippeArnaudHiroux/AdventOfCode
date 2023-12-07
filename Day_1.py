@@ -1,6 +1,6 @@
 import re
 
-file_path = 'input.txt'
+file_path = 'Day_1.txt'
 with open(file_path, 'r') as file:
     input = [line.strip() for line in file]
 
