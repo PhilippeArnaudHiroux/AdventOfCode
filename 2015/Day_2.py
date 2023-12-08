@@ -8,6 +8,7 @@ def part_1(input_List):
     input_List = [[int(num) for num in sublist] for sublist in input_List]
 
     result = 0
+    count  = 0
 
     for i in range(len(input_List)):
         lw =  input_List[i][0] * input_List[i][1]
@@ -16,14 +17,16 @@ def part_1(input_List):
 
         if lw < wh and lw < hl:
             result += 2 * lw + 2 * wh + 2 * hl + lw
-            print("0")
+            #print("0")
         if wh < lw and wh < hl:
             result += 2 * lw + 2 * wh + 2 * hl + wh
-            print("1")
+            #print("1")
         if hl < lw and hl < wh:
             result += 2 * lw + 2 * wh + 2 * hl + hl
-            print("2")
+            #print("2")
+        count = i
 
-        print(result)
+    print(count)
+    print(result)
 
 part_1(input)
