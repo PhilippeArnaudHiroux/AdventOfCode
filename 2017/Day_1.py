@@ -35,5 +35,5 @@ def part_2(file_Path):
 
     print(count)
 
-#part_1(file_Name)
+part_1(file_Name)
 part_2(file_Name)
