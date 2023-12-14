@@ -2,53 +2,59 @@ file_Name = "Day_1.txt"
 
 def part_1(file_Path):
     with open(file_Path, 'r') as file:
-        input = file.read()
+        input = file.read().replace(" ", "").split(",")
+    x, y = 0, 0
+    direction = 0
 
-    input = input.replace(" ","")
-    input = list(input.split(','))
-
-    x_As = 0
-    y_As = 0
-    direction = "North"
-    print(input)
-
-    for i in range(len(input)):
-        left_Right = input[i][:1]
-        steps = input[i][1:]
-        steps = int(steps)
-        print("i", i)
-        print(left_Right, steps)
-
-        if direction == "North":
-            if left_Right == "L":
-                x_As -= steps
-                direction = "West"
-            else:
-                x_As += steps
-                direction = "East"
-        elif direction == "East":
-            if left_Right == "L":
-                y_As += steps
-                direction = "North"
-            else:
-                y_As -= steps
-                direction = "South"
-        elif direction == "South":
-            if left_Right == "L":
-                x_As += steps
-                direction = "East"
-            else:
-                x_As -= steps
-                direction = "West"
-        elif direction == "West":
-            if direction == "L":
-                y_As -= steps
-                direction = "South"
-            else:
-                y_As += steps
-                direction = "North"
+    for instruction in input:
+        turn, distance = instruction[0], int(instruction[1:])
         
-    print(x_As, y_As)
-    print(abs(x_As) + abs(y_As))
+        if turn == 'R':
+            direction = (direction + 1) % 4
+        elif turn == 'L':
+            direction = (direction - 1) % 4
+
+        if direction == 0:
+            y += distance
+        elif direction == 1:
+            x += distance
+        elif direction == 2:
+            y -= distance
+        elif direction == 3:
+            x -= distance
+
+    print(abs(x) + abs(y))
+
+def part_2(file_Path):
+    with open(file_Path, 'r') as file:
+        input = file.read().replace(" ", "").split(",")
+    x, y = 0, 0
+    direction = 0
+    visited_locations = set()
+    visited_locations.add((x, y))
+
+    for instruction in input:
+        turn, distance = instruction[0], int(instruction[1:])
+        
+        if turn == 'R':
+            direction = (direction + 1) % 4
+        elif turn == 'L':
+            direction = (direction - 1) % 4
+
+        for _ in range(distance):
+            if direction == 0:
+                y += 1
+            elif direction == 1:
+                x += 1
+            elif direction == 2:
+                y -= 1
+            elif direction == 3:
+                x -= 1
+
+            if (x, y) in visited_locations:
+                return abs(x) + abs(y)
+            
+            visited_locations.add((x, y))
 
 part_1(file_Name)
+print(part_2(file_Name))
