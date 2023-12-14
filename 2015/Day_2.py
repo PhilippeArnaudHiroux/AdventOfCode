@@ -1,32 +1,36 @@
-file_path = 'Day_2.txt'
-with open(file_path, 'r') as file:
-    input = file.read()
+file_Name = "Day_2.txt"
 
-def part_1(input_List):
-    input_List = input_List.split()
-    input_List = [item.split('x') for item in input_List]
-    input_List = [[int(num) for num in sublist] for sublist in input_List]
-
+def part_1(file_Path):
     result = 0
-    count  = 0
+    with open(file_Path, 'r') as file:
+        input = file.read()
 
-    for i in range(len(input_List)):
-        lw =  input_List[i][0] * input_List[i][1]
-        wh = input_List[i][1] * input_List[i][2]
-        hl = input_List[i][0] * input_List[i][2]
+    input = input.split('\n')
+    input = [list(map(int, row.split('x'))) for row in input]
 
-        if lw < wh and lw < hl:
-            result += 2 * lw + 2 * wh + 2 * hl + lw
-            #print("0")
-        if wh < lw and wh < hl:
-            result += 2 * lw + 2 * wh + 2 * hl + wh
-            #print("1")
-        if hl < lw and hl < wh:
-            result += 2 * lw + 2 * wh + 2 * hl + hl
-            #print("2")
-        count = i
+    for dimensions in input:
+        l, w, h = dimensions
+        surface_area = 2 * l * w + 2 * w * h + 2 * h * l
+        smallest_side_area = min(l * w, w * h, h * l)
+        result += surface_area + smallest_side_area
 
-    print(count)
     print(result)
 
-part_1(input)
+def part_2(file_Path):
+    result = 0
+    with open(file_Path, 'r') as file:
+        input = file.read()
+
+    input = input.split('\n')
+    input = [list(map(int, row.split('x'))) for row in input]
+
+    for dimensions in input:
+        l, w, h = dimensions
+        perimeter = 2 * min(l + w, w + h, h + l)
+        bow_ribbon = l * w * h
+        result += perimeter + bow_ribbon
+
+    print(result)
+
+part_1(file_Name)
+part_2(file_Name)
